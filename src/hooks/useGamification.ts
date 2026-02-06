@@ -186,7 +186,7 @@ export function useGamification(options: UseGamificationOptions = { showNotifica
     onSuccess: async (result, { action }) => {
       if (result) {
         showXPNotification(result, action);
-        
+
         // Check for new achievements
         if (userId) {
           const achievements = await checkAchievements(userId);
@@ -194,7 +194,7 @@ export function useGamification(options: UseGamificationOptions = { showNotifica
             showAchievementNotification(achievements);
           }
         }
-        
+
         // Invalidate queries to refresh data immediately
         queryClient.invalidateQueries({ queryKey: ['userStats', userId] });
         queryClient.invalidateQueries({ queryKey: ['dailyActivities', userId] });
@@ -211,14 +211,14 @@ export function useGamification(options: UseGamificationOptions = { showNotifica
     onSuccess: async (result, { difficulty }) => {
       if (result) {
         showXPNotification(result, `${difficulty.charAt(0).toUpperCase() + difficulty.slice(1)} problem solved!`);
-        
+
         if (userId) {
           const achievements = await checkAchievements(userId);
           if (achievements.length > 0) {
             showAchievementNotification(achievements);
           }
         }
-        
+
         queryClient.invalidateQueries({ queryKey: ['userStats', userId] });
         queryClient.invalidateQueries({ queryKey: ['dailyActivities', userId] });
       }
@@ -227,15 +227,15 @@ export function useGamification(options: UseGamificationOptions = { showNotifica
 
   // Record assessment mutation
   const recordAssessmentMutation = useMutation({
-    mutationFn: async ({ 
-      assessmentId, 
-      score, 
-      passed, 
-      timeTaken 
-    }: { 
-      assessmentId: string; 
-      score: number; 
-      passed: boolean; 
+    mutationFn: async ({
+      assessmentId,
+      score,
+      passed,
+      timeTaken
+    }: {
+      assessmentId: string;
+      score: number;
+      passed: boolean;
       timeTaken: number;
     }) => {
       if (!userId) throw new Error("Not logged in");
@@ -244,14 +244,14 @@ export function useGamification(options: UseGamificationOptions = { showNotifica
     onSuccess: async (result, { passed }) => {
       if (result) {
         showXPNotification(result, passed ? "Assessment passed!" : "Assessment completed");
-        
+
         if (userId) {
           const achievements = await checkAchievements(userId);
           if (achievements.length > 0) {
             showAchievementNotification(achievements);
           }
         }
-        
+
         queryClient.invalidateQueries({ queryKey: ['userStats', userId] });
         queryClient.invalidateQueries({ queryKey: ['dailyActivities', userId] });
       }
@@ -260,27 +260,27 @@ export function useGamification(options: UseGamificationOptions = { showNotifica
 
   // Record application update mutation
   const recordApplicationMutation = useMutation({
-    mutationFn: async ({ oldStatus, newStatus }: { oldStatus: string; newStatus: string }) => {
+    mutationFn: async ({ oldStatus, newStatus, applicationId }: { oldStatus: string; newStatus: string; applicationId?: string }) => {
       if (!userId) throw new Error("Not logged in");
-      return recordApplicationUpdate(userId, oldStatus, newStatus);
+      return recordApplicationUpdate(userId, oldStatus, newStatus, applicationId);
     },
     onSuccess: async (result, { newStatus }) => {
       if (result && result.xp_gained > 0) {
-        const message = newStatus === 'offer' 
-          ? "Congratulations, you received an offer" 
+        const message = newStatus === 'offer'
+          ? "Congratulations, you received an offer"
           : "Application sent";
         toast({
           title: `+${result.xp_gained} XP`,
           description: message,
         });
-        
+
         if (userId) {
           const achievements = await checkAchievements(userId);
           if (achievements.length > 0) {
             showAchievementNotification(achievements);
           }
         }
-        
+
         queryClient.invalidateQueries({ queryKey: ['userStats', userId] });
         queryClient.invalidateQueries({ queryKey: ['dailyActivities', userId] });
       }
@@ -301,21 +301,21 @@ export function useGamification(options: UseGamificationOptions = { showNotifica
     levelProgress,
     levelThresholds,
     dailyActivities,
-    
+
     // Actions
     awardXP: (action: string, customXP?: number) => awardXPMutation.mutate({ action, customXP }),
     recordProblemSolved: (difficulty: 'easy' | 'medium' | 'hard') => recordProblemMutation.mutate({ difficulty }),
-    recordAssessment: (assessmentId: string, score: number, passed: boolean, timeTaken: number) => 
+    recordAssessment: (assessmentId: string, score: number, passed: boolean, timeTaken: number) =>
       recordAssessmentMutation.mutate({ assessmentId, score, passed, timeTaken }),
-    recordApplicationUpdate: (oldStatus: string, newStatus: string) => 
-      recordApplicationMutation.mutate({ oldStatus, newStatus }),
-    
+    recordApplicationUpdate: (oldStatus: string, newStatus: string, applicationId?: string) =>
+      recordApplicationMutation.mutate({ oldStatus, newStatus, applicationId }),
+
     // Refetch
     refetchStats,
     refetchActivities,
-    
+
     // Loading states
-    isLoading: awardXPMutation.isPending || recordProblemMutation.isPending || 
-               recordAssessmentMutation.isPending || recordApplicationMutation.isPending,
+    isLoading: awardXPMutation.isPending || recordProblemMutation.isPending ||
+      recordAssessmentMutation.isPending || recordApplicationMutation.isPending,
   };
 }

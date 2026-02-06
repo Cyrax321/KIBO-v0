@@ -272,7 +272,7 @@ const Applications: React.FC = () => {
       );
       toast({ title: "Error", description: error.message, variant: "destructive" });
     } else {
-      recordApplicationUpdate(oldStatus, newStatus);
+      recordApplicationUpdate(oldStatus, newStatus, id);
       notifyApplicationUpdate(app.company, newStatus);
     }
   };

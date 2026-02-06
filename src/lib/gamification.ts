@@ -35,12 +35,12 @@ export async function initDailyActivity(userId: string): Promise<DailyInitResult
   const { data, error } = await supabase.rpc('init_daily_activity', {
     p_user_id: userId
   });
-  
+
   if (error) {
     console.error('Error initializing daily activity:', error);
     return null;
   }
-  
+
   return data?.[0] || null;
 }
 
@@ -51,30 +51,30 @@ export async function awardXP(userId: string, action: string, customXP?: number)
     p_action: action,
     p_custom_xp: customXP || null
   });
-  
+
   if (error) {
     console.error('Error awarding XP:', error);
     return null;
   }
-  
+
   return data?.[0] || null;
 }
 
 // Record problem solved
 export async function recordProblemSolved(
-  userId: string, 
+  userId: string,
   difficulty: 'easy' | 'medium' | 'hard'
 ): Promise<XPResult & { new_problems_solved: number } | null> {
   const { data, error } = await supabase.rpc('record_problem_solved', {
     p_user_id: userId,
     p_difficulty: difficulty
   });
-  
+
   if (error) {
     console.error('Error recording problem solved:', error);
     return null;
   }
-  
+
   return data?.[0] || null;
 }
 
@@ -93,12 +93,12 @@ export async function recordAssessmentCompleted(
     p_passed: passed,
     p_time_taken: timeTaken
   });
-  
+
   if (error) {
     console.error('Error recording assessment:', error);
     return null;
   }
-  
+
   return data?.[0] || null;
 }
 
@@ -106,19 +106,21 @@ export async function recordAssessmentCompleted(
 export async function recordApplicationUpdate(
   userId: string,
   oldStatus: string,
-  newStatus: string
+  newStatus: string,
+  applicationId?: string
 ): Promise<{ new_xp: number; xp_gained: number } | null> {
   const { data, error } = await supabase.rpc('record_application_update', {
     p_user_id: userId,
     p_old_status: oldStatus,
-    p_new_status: newStatus
+    p_new_status: newStatus,
+    p_application_id: applicationId
   });
-  
+
   if (error) {
     console.error('Error recording application update:', error);
     return null;
   }
-  
+
   return data?.[0] || null;
 }
 
@@ -127,12 +129,12 @@ export async function checkAchievements(userId: string): Promise<AchievementUnlo
   const { data, error } = await supabase.rpc('check_achievements', {
     p_user_id: userId
   });
-  
+
   if (error) {
     console.error('Error checking achievements:', error);
     return [];
   }
-  
+
   return data || [];
 }
 
@@ -142,12 +144,12 @@ export async function getLevelThresholds(): Promise<LevelThreshold[]> {
     .from('level_thresholds')
     .select('*')
     .order('level', { ascending: true });
-  
+
   if (error) {
     console.error('Error fetching level thresholds:', error);
     return [];
   }
-  
+
   return data || [];
 }
 
@@ -156,12 +158,12 @@ export async function getXPConfig(): Promise<Record<string, number>> {
   const { data, error } = await supabase
     .from('xp_config')
     .select('id, xp_value');
-  
+
   if (error) {
     console.error('Error fetching XP config:', error);
     return {};
   }
-  
+
   return (data || []).reduce((acc, item) => {
     acc[item.id] = item.xp_value;
     return acc;
@@ -178,19 +180,19 @@ export async function getDailyActivities(userId: string): Promise<{
 }[]> {
   const startDate = new Date();
   startDate.setDate(startDate.getDate() - 365);
-  
+
   const { data, error } = await supabase
     .from('daily_activities')
     .select('activity_date, xp_earned, problems_solved, applications_sent, assessments_completed')
     .eq('user_id', userId)
     .gte('activity_date', startDate.toISOString().split('T')[0])
     .order('activity_date', { ascending: true });
-  
+
   if (error) {
     console.error('Error fetching daily activities:', error);
     return [];
   }
-  
+
   return (data || []).map(d => ({
     date: d.activity_date,
     xp: d.xp_earned,
@@ -220,14 +222,14 @@ export async function getUserStats(userId: string): Promise<{
       .select('id')
       .eq('user_id', userId)
   ]);
-  
+
   if (profileRes.error) {
     console.error('Error fetching user stats:', profileRes.error);
     return null;
   }
-  
+
   const profile = profileRes.data;
-  
+
   return {
     totalXP: profile.xp || 0,
     level: profile.level || 1,
@@ -240,24 +242,24 @@ export async function getUserStats(userId: string): Promise<{
 
 // Calculate XP progress to next level
 export function calculateLevelProgress(
-  currentXP: number, 
+  currentXP: number,
   thresholds: LevelThreshold[]
 ): { current: number; next: number; progress: number; title: string } {
   const currentLevel = thresholds.find(t => t.xp_required <= currentXP);
   const nextLevel = thresholds.find(t => t.xp_required > currentXP);
-  
+
   if (!currentLevel) {
     return { current: 0, next: 100, progress: 0, title: 'Novice' };
   }
-  
+
   if (!nextLevel) {
     return { current: currentXP, next: currentXP, progress: 100, title: currentLevel.title };
   }
-  
+
   const xpInCurrentLevel = currentXP - currentLevel.xp_required;
   const xpNeededForNext = nextLevel.xp_required - currentLevel.xp_required;
   const progress = Math.min(100, Math.round((xpInCurrentLevel / xpNeededForNext) * 100));
-  
+
   return {
     current: xpInCurrentLevel,
     next: xpNeededForNext,
