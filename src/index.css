@@ -1,0 +1,340 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 
+  KIBO Design System - "Modern Zen" Theme
+  All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Base colors - Light mode with zinc-50 background */
+    --background: 240 5% 96%;
+    --foreground: 240 10% 3.9%;
+
+    /* Cards with white background */
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+
+    /* Primary - Violet 600 */
+    --primary: 262.1 83.3% 57.8%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Secondary - Neutral */
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+
+    /* Muted */
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+
+    /* Accent - Violet tint */
+    --accent: 262.1 83.3% 95%;
+    --accent-foreground: 262.1 83.3% 57.8%;
+
+    /* Success - Emerald 500 */
+    --success: 160 84% 39%;
+    --success-foreground: 0 0% 100%;
+
+    /* Warning - Orange 500 */
+    --warning: 24.6 95% 53.1%;
+    --warning-foreground: 0 0% 100%;
+
+    /* Streak - Orange for fire/streak */
+    --streak: 24.6 95% 53.1%;
+    --streak-foreground: 0 0% 100%;
+
+    /* Destructive - Rose 500 */
+    --destructive: 346.8 77.2% 49.8%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Borders and inputs */
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 262.1 83.3% 57.8%;
+
+    --radius: 0.75rem;
+
+    /* Sidebar - Frosted glass effect */
+    --sidebar-background: 0 0% 100% / 0.8;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 262.1 83.3% 57.8%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 262.1 83.3% 95%;
+    --sidebar-accent-foreground: 262.1 83.3% 57.8%;
+    --sidebar-border: 240 5.9% 90%;
+    --sidebar-ring: 262.1 83.3% 57.8%;
+
+    /* Heatmap colors for The Garden */
+    --heatmap-empty: 240 5% 96%;
+    --heatmap-low: 160 60% 85%;
+    --heatmap-medium: 160 70% 65%;
+    --heatmap-high: 160 84% 39%;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(262.1 83.3% 57.8%), hsl(280 80% 60%));
+    --gradient-success: linear-gradient(135deg, hsl(160 84% 39%), hsl(160 84% 50%));
+    --gradient-hero: linear-gradient(135deg, hsl(262.1 83.3% 95%), hsl(240 5% 96%));
+  }
+
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+
+    --card: 240 10% 6%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 240 10% 6%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 262.1 83.3% 57.8%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+
+    --accent: 262.1 83.3% 20%;
+    --accent-foreground: 262.1 83.3% 70%;
+
+    --success: 160 84% 39%;
+    --success-foreground: 0 0% 100%;
+
+    --warning: 24.6 95% 53.1%;
+    --warning-foreground: 0 0% 100%;
+
+    --streak: 24.6 95% 53.1%;
+    --streak-foreground: 0 0% 100%;
+
+    --destructive: 346.8 77.2% 49.8%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 262.1 83.3% 57.8%;
+
+    --sidebar-background: 240 10% 6% / 0.9;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 262.1 83.3% 57.8%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 262.1 83.3% 20%;
+    --sidebar-accent-foreground: 262.1 83.3% 70%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 262.1 83.3% 57.8%;
+
+    --heatmap-empty: 240 10% 10%;
+    --heatmap-low: 160 60% 20%;
+    --heatmap-medium: 160 70% 35%;
+    --heatmap-high: 160 84% 39%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    font-family: 'Inter', system-ui, sans-serif;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+
+  /* Smooth transitions for interactive elements */
+  button, a, input, select, textarea {
+    @apply transition-all duration-200 ease-out;
+  }
+}
+
+@layer utilities {
+  /* Glass morphism */
+  .glass {
+    @apply bg-white/80 backdrop-blur-md border border-white/20;
+  }
+
+  .glass-dark {
+    @apply bg-black/40 backdrop-blur-md border border-white/10;
+  }
+
+  /* Shimmer effect for buttons */
+  .shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .shimmer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.3),
+      transparent
+    );
+    animation: shimmer 2s infinite;
+  }
+
+  @keyframes shimmer {
+    0% {
+      left: -100%;
+    }
+    100% {
+      left: 100%;
+    }
+  }
+
+  /* Spotlight effect */
+  .spotlight {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .spotlight::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+      circle,
+      rgba(139, 92, 246, 0.1) 0%,
+      transparent 50%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+
+  .spotlight:hover::after {
+    opacity: 1;
+  }
+
+  /* Border beam animation */
+  .border-beam {
+    position: relative;
+  }
+
+  .border-beam::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 2px;
+    background: linear-gradient(
+      var(--border-beam-angle, 0deg),
+      transparent 40%,
+      hsl(262.1 83.3% 57.8%) 50%,
+      transparent 60%
+    );
+    -webkit-mask: 
+      linear-gradient(#fff 0 0) content-box, 
+      linear-gradient(#fff 0 0);
+    mask: 
+      linear-gradient(#fff 0 0) content-box, 
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    animation: border-beam-rotate 4s linear infinite;
+  }
+
+  @keyframes border-beam-rotate {
+    0% {
+      --border-beam-angle: 0deg;
+    }
+    100% {
+      --border-beam-angle: 360deg;
+    }
+  }
+
+  /* Spring hover effect */
+  .hover-spring {
+    @apply transition-all duration-300 ease-out;
+  }
+
+  .hover-spring:hover {
+    @apply scale-[1.01] -translate-y-0.5;
+  }
+
+  .hover-spring:active {
+    @apply scale-[0.98] translate-y-0;
+  }
+
+  /* Glow effect */
+  .glow-primary {
+    box-shadow: 0 0 20px -5px hsl(262.1 83.3% 57.8% / 0.4);
+  }
+
+  .glow-success {
+    box-shadow: 0 0 20px -5px hsl(160 84% 39% / 0.4);
+  }
+
+  /* Infinite scroll animation for ticker */
+  .animate-scroll {
+    animation: scroll 40s linear infinite;
+  }
+
+  .animate-scroll-reverse {
+    animation: scroll-reverse 35s linear infinite;
+  }
+
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-33.33%);
+    }
+  }
+
+  @keyframes scroll-reverse {
+    0% {
+      transform: translateX(-33.33%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  /* Testimonial scroll animations - separate from ticker */
+  .animate-testimonial-scroll {
+    animation: testimonial-scroll 60s linear infinite;
+  }
+
+  .animate-testimonial-scroll-reverse {
+    animation: testimonial-scroll-reverse 55s linear infinite;
+  }
+
+  @keyframes testimonial-scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-33.33%);
+    }
+  }
+
+  @keyframes testimonial-scroll-reverse {
+    0% {
+      transform: translateX(-33.33%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+}
