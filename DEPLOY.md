@@ -23,7 +23,7 @@ This guide details how to deploy **Kibo** to production using [Vercel](https://v
     *   Expand the "Environment Variables" section.
     *   Add the following keys from your local `.env` file:
         *   `VITE_SUPABASE_URL`
-        *   `VITE_SUPABASE_ANON_KEY`
+        *   `VITE_SUPABASE_PUBLISHABLE_KEY`
 5.  **Deploy:**
     *   Click **Deploy**.
     *   Wait for the build to complete (approx. 1-2 minutes).
