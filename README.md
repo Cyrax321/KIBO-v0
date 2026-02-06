@@ -1,73 +1,82 @@
-# Welcome to your Lovable project
+# Kibo - Career Acceleration Platform
 
-## Project info
+![Kibo Banner](public/og-image.png)
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+Kibo is a next-generation career acceleration platform designed to gamify the job hunt and skill acquisition process for software engineers. By combining real-time analytics, gamified progress tracking, and AI-driven insights, Kibo transforms the mundane task of job applications into an engaging, high-performance workflow.
 
-## How can I edit this code?
+## 🚀 Features
 
-There are several ways of editing your application.
+### 🎮 Gamified Productivity
+- **Daily Focus & XP System:** Earn XP for completing tasks, solving problems, and applying to jobs.
+- **The Garden:** A GitHub-style contribution graph that visualizes your daily consistency and momentum.
+- **Real-time Leaderboard:** Compete with peers globally. Live updates ensure you always know where you stand.
+- **Achievements & Badges:** Unlock milestones like "Code Ninja", "Job Hunter", and "Streak Master".
 
-**Use Lovable**
+### 📊 Advanced Analytics
+- **Mission Control Dashboard:** A comprehensive view of your application funnel, coding problem stats, and weekly goals.
+- **Skills Radar:** Visualize your technical strengths and weaknesses dynamically based on solved problems.
+- **Success Rate Gauge:** Track your interview and offer rates to optimize your strategy.
+- **Activity Heatmaps:** Detailed breakdown of your productivity patterns.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+### ⚡ Real-Time Sync Engine
+- **Instant Updates:** Built on Supabase Realtime, actions reflect instantly across all devices.
+- **Live Notifications:** Get notified 15 minutes before scheduled interviews or contests.
+- **Optimistic UI:** Smooth, lag-free interactions for task management and status updates.
 
-Changes made via Lovable will be committed automatically to this repo.
+### 🛠 Tools & Utilities
+- **Code Lab:** Track LeetCode/HackerRank progress with integrated difficulty analysis.
+- **Application Tracker:** Kanban-style board to manage job applications from "Applied" to "Offer".
+- **Schedule Manager:** Integrated calendar for interviews and coding contests.
 
-**Use your preferred IDE**
+## 💻 Tech Stack
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+- **Frontend:** React 18, TypeScript, Vite
+- **Styling:** Tailwind CSS, Shadcn UI, Framer Motion (Animations)
+- **Backend / Database:** Supabase (PostgreSQL, Auth, Realtime)
+- **State Management:** React Query (TanStack Query)
+- **Utilities:** Lucide Icons, Recharts (Data Visualization), date-fns
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## 🏗️ Getting Started
 
-Follow these steps:
+Follow these steps to set up the project locally.
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+### Prerequisites
+- Node.js (v18 or higher)
+- npm or bun
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+### Installation
 
-# Step 3: Install the necessary dependencies.
-npm i
+1. **Clone the repository**
+   ```bash
+   git clone git@github.com:Cyrax321/KIBO-v0.git
+   cd KIBO-v0
+   ```
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-**Edit a file directly in GitHub**
+3. **Set up Environment Variables**
+   Create a `.env` file in the root directory and add your Supabase credentials:
+   ```env
+   VITE_SUPABASE_URL=your_supabase_url
+   VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+   ```
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+4. **Run the development server**
+   ```bash
+   npm run dev
+   ```
 
-**Use GitHub Codespaces**
+## 🤝 Contributing
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-## What technologies are used for this project?
+## 📄 License
 
-This project is built with:
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+---
 
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+Built with ❤️ by [Your Name](https://github.com/Cyrax321)
