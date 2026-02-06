@@ -1,7 +1,10 @@
 {
-  "name": "vite_react_shadcn_ts",
+  "name": "kibo-flow",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "Enterprise-grade career acceleration platform for software engineers.",
+  "author": "Kibo Systems",
+  "license": "MIT",
   "type": "module",
   "scripts": {
     "dev": "vite",

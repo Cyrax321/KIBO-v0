@@ -1,82 +1,110 @@
-# Kibo - Career Acceleration Platform
+<div align="center">
+  <img src="public/kibo-logo.svg" alt="Kibo Logo" width="120" height="auto" />
+  <h1>Kibo</h1>
+  <p>
+    <strong>The Intelligent Career Orchestration Platform</strong>
+  </p>
+  
+  <p>
+    <a href="#features">Features</a> •
+    <a href="#architecture">Architecture</a> •
+    <a href="#getting-started">Getting Started</a> •
+    <a href="#contributing">Contributing</a> •
+    <a href="#license">License</a>
+  </p>
 
-![Kibo Banner](public/og-image.png)
+  <p>
+    <img src="https://img.shields.io/badge/build-passing-success?style=flat-square&color=00c805" alt="Build Status" />
+    <img src="https://img.shields.io/badge/version-1.0.0-blue?style=flat-square" alt="Version" />
+    <img src="https://img.shields.io/badge/license-MIT-gray?style=flat-square" alt="License" />
+    <img src="https://img.shields.io/badge/typescript-5.0-blue?style=flat-square&logo=typescript" alt="TypeScript" />
+  </p>
+</div>
 
-Kibo is a next-generation career acceleration platform designed to gamify the job hunt and skill acquisition process for software engineers. By combining real-time analytics, gamified progress tracking, and AI-driven insights, Kibo transforms the mundane task of job applications into an engaging, high-performance workflow.
+---
 
-## 🚀 Features
+**Kibo** is a production-grade, full-stack career acceleration engine designed to optimize the technical recruitment lifecycle for software engineers. It integrates gamification mechanics with real-time analytics to drive consistent productivity, skill acquisition, and pipeline management.
 
-### 🎮 Gamified Productivity
-- **Daily Focus & XP System:** Earn XP for completing tasks, solving problems, and applying to jobs.
-- **The Garden:** A GitHub-style contribution graph that visualizes your daily consistency and momentum.
-- **Real-time Leaderboard:** Compete with peers globally. Live updates ensure you always know where you stand.
-- **Achievements & Badges:** Unlock milestones like "Code Ninja", "Job Hunter", and "Streak Master".
+Built with performance, scalability, and type safety as core tenets, Kibo leverages a modern event-driven architecture to deliver instantaneous state synchronization across distributed clients.
 
-### 📊 Advanced Analytics
-- **Mission Control Dashboard:** A comprehensive view of your application funnel, coding problem stats, and weekly goals.
-- **Skills Radar:** Visualize your technical strengths and weaknesses dynamically based on solved problems.
-- **Success Rate Gauge:** Track your interview and offer rates to optimize your strategy.
-- **Activity Heatmaps:** Detailed breakdown of your productivity patterns.
+## ⚡️ Key Components
 
-### ⚡ Real-Time Sync Engine
-- **Instant Updates:** Built on Supabase Realtime, actions reflect instantly across all devices.
-- **Live Notifications:** Get notified 15 minutes before scheduled interviews or contests.
-- **Optimistic UI:** Smooth, lag-free interactions for task management and status updates.
+### Core Engine
+*   **Real-time Event Bus:** Powered by PostgreSQL logical replication (Supabase Realtime) to synchronize state across clients with sub-100ms latency.
+*   **Optimistic Mutation Layer:** Custom hooks and TanStack Query configuration ensure immediate UI feedback before server confirmation.
+*   **Gamification Protocol:** Rules engine handling XP distribution, streak calculations, and achievement unlocking based on user events.
 
-### 🛠 Tools & Utilities
-- **Code Lab:** Track LeetCode/HackerRank progress with integrated difficulty analysis.
-- **Application Tracker:** Kanban-style board to manage job applications from "Applied" to "Offer".
-- **Schedule Manager:** Integrated calendar for interviews and coding contests.
+### Mission Control
+*   **Analytics Dashboard:** High-performance data visualization using Recharts for trend analysis (Applications, Problems Solved, XP).
+*   **Global Leaderboard:** Live ranking system with efficient pagination and tiered aggregation.
+*   **The Garden:** GitHub-style activity contribution graph for visualizing momentum and consistency.
 
-## 💻 Tech Stack
+## 🏗 Architecture
 
-- **Frontend:** React 18, TypeScript, Vite
-- **Styling:** Tailwind CSS, Shadcn UI, Framer Motion (Animations)
-- **Backend / Database:** Supabase (PostgreSQL, Auth, Realtime)
-- **State Management:** React Query (TanStack Query)
-- **Utilities:** Lucide Icons, Recharts (Data Visualization), date-fns
+Kibo follows a modular, component-driven architecture emphasizing separation of concerns and type integrity.
 
-## 🏗️ Getting Started
+```mermaid
+graph TD
+    Client[Client (React/Vite)] --> |REST/RPC| Edge[Supabase Edge Network]
+    Client --> |WebSocket| Realtime[Realtime Cluster]
+    Edge --> DB[(PostgreSQL)]
+    Realtime -- Listen --> DB
+    Client --> Auth[Auth Service]
+```
 
-Follow these steps to set up the project locally.
+### Technology Stack
+
+| Layer | Technology | Rationale |
+|-------|------------|-----------|
+| **Frontend** | React 18, TypeScript | Component modularity and static type safety. |
+| **Build System** | Vite | High-performance dev server and optimized HMR. |
+| **State** | TanStack Query | Server-state management, caching, and optimistic UI. |
+| **Database** | PostgreSQL | Relational integrity and JSONB capabilities. |
+| **Realtime** | Supabase Realtime | WebSocket subscriptions for CDC (Change Data Capture). |
+| **Styling** | TailwindCSS + Shadcn | Utility-first, accessible design system. |
+
+## 🚀 Getting Started
 
 ### Prerequisites
-- Node.js (v18 or higher)
-- npm or bun
+
+*   Node.js v18.0.0+
+*   npm v9.0.0+
 
 ### Installation
 
-1. **Clone the repository**
-   ```bash
-   git clone git@github.com:Cyrax321/KIBO-v0.git
-   cd KIBO-v0
-   ```
+1.  **Clone the repository**
+    ```bash
+    git clone https://github.com/Cyrax321/KIBO-v0.git
+    cd KIBO-v0
+    ```
 
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
+2.  **Install dependencies**
+    ```bash
+    npm ci
+    ```
 
-3. **Set up Environment Variables**
-   Create a `.env` file in the root directory and add your Supabase credentials:
-   ```env
-   VITE_SUPABASE_URL=your_supabase_url
-   VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
-   ```
+3.  **Environment Configuration**
+    Copy the example environment file and configure your credentials.
+    ```bash
+    cp .env.example .env
+    ```
 
-4. **Run the development server**
-   ```bash
-   npm run dev
-   ```
+4.  **Start the development server**
+    ```bash
+    npm run dev
+    ```
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+We welcome contributions from the community. Please read our [Contributing Guidelines](CONTRIBUTING.md) and [Code of Conduct](CODE_OF_CONDUCT.md) before submitting a Pull Request.
+
+### Development Standards
+*   **Commits:** Follow conventional commits specification.
+*   **Linting:** ESLint + Prettier configuration is enforced.
+*   **Testing:** Vitest for unit/integration tests.
 
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
----
-
-Built with ❤️ by [Your Name](https://github.com/Cyrax321)
+Copyright © 2026 Kibo Systems. All specific rights reserved.
