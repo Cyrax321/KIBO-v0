@@ -1,0 +1,41 @@
+<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Head base - purple circle -->
+  <circle cx="50" cy="55" r="40" fill="hsl(262.1 83.3% 57.8%)" />
+  
+  <!-- Left ear -->
+  <polygon points="18,35 28,5 42,30" fill="hsl(262.1 83.3% 57.8%)" />
+  <polygon points="22,32 29,12 38,30" fill="hsl(310 70% 85%)" />
+  
+  <!-- Right ear -->
+  <polygon points="82,35 72,5 58,30" fill="hsl(262.1 83.3% 57.8%)" />
+  <polygon points="78,32 71,12 62,30" fill="hsl(310 70% 85%)" />
+  
+  <!-- Face cream area -->
+  <ellipse cx="50" cy="60" rx="28" ry="25" fill="hsl(270 100% 99%)" />
+  
+  <!-- Left eye white -->
+  <ellipse cx="38" cy="52" rx="9" ry="10" fill="white" />
+  <!-- Left pupil -->
+  <circle cx="38" cy="53" r="5" fill="hsl(240 50% 15%)" />
+  <!-- Left eye highlight -->
+  <circle cx="36" cy="50" r="2" fill="white" />
+  <circle cx="40" cy="54" r="1" fill="white" />
+  
+  <!-- Right eye white -->
+  <ellipse cx="62" cy="52" rx="9" ry="10" fill="white" />
+  <!-- Right pupil -->
+  <circle cx="62" cy="53" r="5" fill="hsl(240 50% 15%)" />
+  <!-- Right eye highlight -->
+  <circle cx="60" cy="50" r="2" fill="white" />
+  <circle cx="64" cy="54" r="1" fill="white" />
+  
+  <!-- Nose -->
+  <ellipse cx="50" cy="65" rx="4" ry="3" fill="hsl(262.1 83.3% 35%)" />
+  
+  <!-- Smile -->
+  <path d="M 42 72 Q 50 80 58 72" stroke="hsl(262.1 83.3% 35%)" stroke-width="2.5" fill="none" stroke-linecap="round" />
+  
+  <!-- Rosy cheeks -->
+  <ellipse cx="28" cy="62" rx="6" ry="4" fill="hsl(340 80% 80%)" opacity="0.5" />
+  <ellipse cx="72" cy="62" rx="6" ry="4" fill="hsl(340 80% 80%)" opacity="0.5" />
+</svg>
