@@ -329,7 +329,7 @@ const Playground: React.FC = () => {
                 </div>
 
                 {/* Main Content */}
-                <div className="flex-1 flex min-h-0">
+                <div className="flex-1 flex min-h-0 flex-col lg:flex-row">
                     {/* Code Editor Panel */}
                     <div className="flex-1 flex flex-col">
                         {/* File Tab - LeetCode style */}
@@ -368,7 +368,7 @@ const Playground: React.FC = () => {
                     </div>
 
                     {/* Right Panel - Console (LeetCode style) */}
-                    <div className="w-[380px] flex flex-col border-l border-[#2d2d2d] bg-[#1e1e1e]">
+                    <div className="w-full lg:w-[380px] flex flex-col border-t lg:border-t-0 lg:border-l border-[#2d2d2d] bg-[#1e1e1e]">
                         {/* Console Tabs - LeetCode style */}
                         <div className="flex bg-[#252526] border-b border-[#2d2d2d]">
                             <button
